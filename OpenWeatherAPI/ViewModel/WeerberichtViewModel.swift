@@ -19,14 +19,17 @@ class WeerberichtViewModel: ObservableObject {
         return temperatuur
     }
     
-    func fetchWeerbericht() {
+    func fetchWeerbericht(stadNaam: String) {
         
-        NetwerkManager().getWeather(stadNaam: "utrecht") { result in
+        // Deze stadNaam.escaped() zorgt ervoor dat de spaties van de input van de gebruiker worden omgezet naar %20 zodat de URL werkt (zie: StringExtension)
+        guard let stadNaam = stadNaam.escaped() else {
+            fatalError("URL escaping error")
+        }
+        
+        NetwerkManager().getWeather(stadNaam: stadNaam) { result in
             switch result {
             case .success(let weerbericht):
-                DispatchQueue.main.async {
-                    self.weerbericht = weerbericht
-                }
+                self.weerbericht = weerbericht
             case .failure(_ ):
                 print("error")
             }
