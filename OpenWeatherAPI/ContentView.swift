@@ -9,8 +9,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject private var weerberichtVM = WeerberichtViewModel()
+    
     var body: some View {
-        Text("Hello, World!")
+        Text("\(weerberichtVM.temperatuur)")
+            .onAppear() {
+                self.weerberichtVM.fetchWeerbericht()
+        }
     }
 }
 

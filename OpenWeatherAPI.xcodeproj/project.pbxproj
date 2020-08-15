@@ -13,6 +13,10 @@
 		AF8D72F524E805C200EDFA34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8D72F424E805C200EDFA34 /* Assets.xcassets */; };
 		AF8D72F824E805C200EDFA34 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF8D72F724E805C200EDFA34 /* Preview Assets.xcassets */; };
 		AF8D72FB24E805C200EDFA34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8D72F924E805C200EDFA34 /* LaunchScreen.storyboard */; };
+		AF8D730424E80A1B00EDFA34 /* Weerbericht.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D730324E80A1B00EDFA34 /* Weerbericht.swift */; };
+		AF8D730724E80C4A00EDFA34 /* NetwerkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D730624E80C4A00EDFA34 /* NetwerkManager.swift */; };
+		AF8D730B24E813BE00EDFA34 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D730A24E813BE00EDFA34 /* Constants.swift */; };
+		AF8D730E24E81C3900EDFA34 /* WeerberichtViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D730D24E81C3900EDFA34 /* WeerberichtViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		AF8D72F724E805C200EDFA34 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AF8D72FA24E805C200EDFA34 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF8D72FC24E805C200EDFA34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF8D730324E80A1B00EDFA34 /* Weerbericht.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weerbericht.swift; sourceTree = "<group>"; };
+		AF8D730624E80C4A00EDFA34 /* NetwerkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwerkManager.swift; sourceTree = "<group>"; };
+		AF8D730A24E813BE00EDFA34 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AF8D730D24E81C3900EDFA34 /* WeerberichtViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeerberichtViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,9 @@
 		AF8D72ED24E805BE00EDFA34 /* OpenWeatherAPI */ = {
 			isa = PBXGroup;
 			children = (
+				AF8D730C24E81C2100EDFA34 /* ViewModel */,
+				AF8D730524E80C3300EDFA34 /* Netwerk */,
+				AF8D730224E809FF00EDFA34 /* Model */,
 				AF8D72EE24E805BE00EDFA34 /* AppDelegate.swift */,
 				AF8D72F024E805BE00EDFA34 /* SceneDelegate.swift */,
 				AF8D72F224E805BE00EDFA34 /* ContentView.swift */,
@@ -73,6 +84,31 @@
 				AF8D72F724E805C200EDFA34 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AF8D730224E809FF00EDFA34 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D730324E80A1B00EDFA34 /* Weerbericht.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AF8D730524E80C3300EDFA34 /* Netwerk */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D730624E80C4A00EDFA34 /* NetwerkManager.swift */,
+				AF8D730A24E813BE00EDFA34 /* Constants.swift */,
+			);
+			path = Netwerk;
+			sourceTree = "<group>";
+		};
+		AF8D730C24E81C2100EDFA34 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AF8D730D24E81C3900EDFA34 /* WeerberichtViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +182,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF8D730724E80C4A00EDFA34 /* NetwerkManager.swift in Sources */,
+				AF8D730424E80A1B00EDFA34 /* Weerbericht.swift in Sources */,
 				AF8D72EF24E805BE00EDFA34 /* AppDelegate.swift in Sources */,
+				AF8D730E24E81C3900EDFA34 /* WeerberichtViewModel.swift in Sources */,
 				AF8D72F124E805BE00EDFA34 /* SceneDelegate.swift in Sources */,
 				AF8D72F324E805BE00EDFA34 /* ContentView.swift in Sources */,
+				AF8D730B24E813BE00EDFA34 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
