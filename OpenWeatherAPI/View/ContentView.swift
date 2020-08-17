@@ -27,6 +27,8 @@ struct ContentView: View {
                 }) {Text("Zoek")}
             }
             Text("\(weerberichtVM.temperatuur)")
+            Text("\(weerberichtVM.voelt_aan_als)")
+            Text(weerberichtVM.errorBericht)
         }
         .padding()
     }

@@ -1,17 +1,22 @@
 //
-//  Constants.swift
+//  ConstantsSample.swift
 //  OpenWeatherAPI
 //
-//  Created by Casper Daris on 15/08/2020.
+//  Created by Casper Daris on 18/08/2020.
 //  Copyright © 2020 Casper Daris. All rights reserved.
 //
 
+/*
+    Dit bestand is een voorbeeld voor het COnstants.swift bestand
+    Het Constants.swift bestand staat niet op GitHub, via deze sample kunnen andere developers zelf hun API key toevoegen
+    Deze sample wordt verder niet gebruikt in de applicatie
+ */
+
 import Foundation
 
-struct Constants {
+struct ConstantsSample {
     
-    // Dit is uiteraard de API key (mijn persoonlijke)
-    static let API_KEY = "ca49962d7066403dd1d797b9d9e2b0e2"
+    static let API_KEY = ""
     
     // Deze functie maakt een URL object van de API, de opgegeven stadNaam door de gebruiker en mijn persoonlijke API key
     static func getUrl(stadNaam: String) -> URL? {
