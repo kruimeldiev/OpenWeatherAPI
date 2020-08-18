@@ -8,10 +8,18 @@
 
 import Foundation
 
+enum DataLadenStatus {
+    case none
+    case loading
+    case success
+    case failure
+}
+
 class WeerberichtViewModel: ObservableObject {
     
     @Published private var weerbericht: Weerbericht?
     @Published var errorBericht = ""
+    @Published var dataLadenStatus: DataLadenStatus = .none
     
     
     
@@ -64,19 +72,22 @@ class WeerberichtViewModel: ObservableObject {
         
         // Deze stadNaam.escaped() zorgt ervoor dat de spaties van de input van de gebruiker worden omgezet naar %20 zodat de URL werkt (zie: StringExtension)
         guard let stadNaam = stadNaam.escaped() else {
-            fatalError("Ingevoerde lokatie niet beschikbaar")
+            self.errorBericht = "Ingevoerde lokatie onbekend"
+            return
         }
+        
+        self.dataLadenStatus = .loading
         
         NetwerkManager().getWeather(stadNaam: stadNaam) { result in
             switch result {
             case .success(let weerbericht):
                 self.weerbericht = weerbericht
+                self.dataLadenStatus = .success
             case .failure(_ ):
                 self.errorBericht = "Niet mogenlijk om het weer te tonen"
+                self.dataLadenStatus = .failure
                 self.weerbericht = nil
             }
         }
-        
     }
-    
 }

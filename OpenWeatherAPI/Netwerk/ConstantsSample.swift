@@ -14,6 +14,7 @@
 
 import Foundation
 
+/*
 struct ConstantsSample {
     
     static let API_KEY = ""
@@ -28,3 +29,4 @@ struct ConstantsSample {
     }
     
 }
+ */

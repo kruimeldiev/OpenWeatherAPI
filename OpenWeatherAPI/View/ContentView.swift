@@ -26,9 +26,14 @@ struct ContentView: View {
                     self.weerberichtVM.fetchWeerbericht(stadNaam: self.zoekbalkText)
                 }) {Text("Zoek")}
             }
-            Text("\(weerberichtVM.temperatuur)")
-            Text("\(weerberichtVM.voelt_aan_als)")
-            Text(weerberichtVM.errorBericht)
+            
+            if self.weerberichtVM.dataLadenStatus == .loading {
+                Text("Data laden...")
+            } else if self.weerberichtVM.dataLadenStatus == .success {
+                WeerberichtView(weerberichtVM: self.weerberichtVM)
+            } else if self.weerberichtVM.dataLadenStatus == .failure {
+                Text(self.weerberichtVM.errorBericht)
+            }
         }
         .padding()
     }
