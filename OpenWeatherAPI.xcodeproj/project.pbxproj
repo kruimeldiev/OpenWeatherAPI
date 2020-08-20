@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF81088924E865EB00ED6F9A /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF81088824E865EB00ED6F9A /* StringExtensions.swift */; };
+		AF1BCD8824EED507005BE35F /* WeerberichtLadenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1BCD8724EED507005BE35F /* WeerberichtLadenView.swift */; };
+		AF81088924E865EB00ED6F9A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF81088824E865EB00ED6F9A /* Extensions.swift */; };
 		AF8741FC24EBF4BE00D54E99 /* WeerberichtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8741FB24EBF4BE00D54E99 /* WeerberichtView.swift */; };
 		AF8D72EF24E805BE00EDFA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D72EE24E805BE00EDFA34 /* AppDelegate.swift */; };
 		AF8D72F124E805BE00EDFA34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D72F024E805BE00EDFA34 /* SceneDelegate.swift */; };
@@ -23,7 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AF81088824E865EB00ED6F9A /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		AF1BCD8724EED507005BE35F /* WeerberichtLadenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeerberichtLadenView.swift; sourceTree = "<group>"; };
+		AF81088824E865EB00ED6F9A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AF8741FB24EBF4BE00D54E99 /* WeerberichtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeerberichtView.swift; sourceTree = "<group>"; };
 		AF8D72EB24E805BE00EDFA34 /* OpenWeatherAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeatherAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF8D72EE24E805BE00EDFA34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,16 +58,9 @@
 			children = (
 				AF8D72F224E805BE00EDFA34 /* ContentView.swift */,
 				AF8741FB24EBF4BE00D54E99 /* WeerberichtView.swift */,
+				AF1BCD8724EED507005BE35F /* WeerberichtLadenView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		AF81088724E865C800ED6F9A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				AF81088824E865EB00ED6F9A /* StringExtensions.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		AF8D72E224E805BE00EDFA34 = {
@@ -92,7 +87,6 @@
 				AF8D730C24E81C2100EDFA34 /* ViewModel */,
 				AF8D730524E80C3300EDFA34 /* Netwerk */,
 				AFB40FA824EB347F00A0F549 /* Extra */,
-				AF81088724E865C800ED6F9A /* Extensions */,
 				AF8D72FC24E805C200EDFA34 /* Info.plist */,
 				AF8D72F424E805C200EDFA34 /* Assets.xcassets */,
 				AF8D72F624E805C200EDFA34 /* Preview Content */,
@@ -140,6 +134,7 @@
 				AF8D72EE24E805BE00EDFA34 /* AppDelegate.swift */,
 				AF8D72F024E805BE00EDFA34 /* SceneDelegate.swift */,
 				AF8D72F924E805C200EDFA34 /* LaunchScreen.storyboard */,
+				AF81088824E865EB00ED6F9A /* Extensions.swift */,
 			);
 			path = Extra;
 			sourceTree = "<group>";
@@ -215,7 +210,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF81088924E865EB00ED6F9A /* StringExtensions.swift in Sources */,
+				AF81088924E865EB00ED6F9A /* Extensions.swift in Sources */,
+				AF1BCD8824EED507005BE35F /* WeerberichtLadenView.swift in Sources */,
 				AFB40FAC24EB3EC700A0F549 /* ConstantsSample.swift in Sources */,
 				AF8D730724E80C4A00EDFA34 /* NetwerkManager.swift in Sources */,
 				AF8D730424E80A1B00EDFA34 /* Weerbericht.swift in Sources */,

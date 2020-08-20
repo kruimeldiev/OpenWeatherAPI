@@ -15,40 +15,27 @@ struct ContentView: View {
     @State var zoekbalkText = ""
     @State var huidigeLokatie = "Utrecht"
     
-    @State var valueVoorToetsenbord: CGFloat = 0
-    
     var body: some View {
         
         ZStack{
             Color("Offwhite")
                 .edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 120) {
-                
-                Spacer()
+            VStack {
                 
                 VStack {
                     HStack {
                         Image(systemName: "mappin.and.ellipse")
                             .font(Font.largeTitle)
                             .foregroundColor(Color("FontColor"))
+                            .padding()
                         Text(huidigeLokatie)
                             .font(Font.largeTitle)
                             .foregroundColor(Color("FontColor"))
                     }
-                    
                     Text("Hier komt de datum")
                 }
-                
-                if self.weerberichtVM.dataLadenStatus == .loading {
-                    Text("Data laden...")
-                        .foregroundColor(Color("FontColor"))
-                } else if self.weerberichtVM.dataLadenStatus == .success {
-                    WeerberichtView(weerberichtVM: self.weerberichtVM)
-                } else if self.weerberichtVM.dataLadenStatus == .failure {
-                    Text(self.weerberichtVM.errorBericht)
-                        .foregroundColor(Color("FontColor"))
-                }
+                .padding(.vertical, 60)
                 
                 HStack {
                     TextField("Zoek op lokatie", text: $zoekbalkText, onCommit: {
@@ -62,31 +49,42 @@ struct ContentView: View {
                     }) {Text("Zoek")}
                 }
                 
+                if self.weerberichtVM.dataLadenStatus == .loading {
+                    WeerberichtLadenView()
+                } else if self.weerberichtVM.dataLadenStatus == .success {
+                    WeerberichtView(weerberichtVM: self.weerberichtVM)
+                } else if self.weerberichtVM.dataLadenStatus == .failure {
+                    Text(self.weerberichtVM.errorBericht)
+                        .foregroundColor(Color("FontColor"))
+                }
+                
+                VStack {
+                    HStack {
+                        Text("Lucht vochtigheid:")
+                        Text("\(self.weerberichtVM.vochtigheid)%")
+                    }
+                    HStack {
+                        Text("Luchtdruk:")
+                        Text("\(self.weerberichtVM.luchtdruk) hPa")
+                    }
+                }
+                .foregroundColor(Color("FontColor"))
+                
                 Spacer()
+                
+                Picker(selection: self.$weerberichtVM.tempUnit, label: Text("Selecteer unit:")) {
+                    ForEach(TempUnit.allCases, id: \.self) { unit in
+                        Text(unit.rawValue.capitalized)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal, 40)
+                
             }
             .padding()
         }
-        // Standaard is de valueVoorToetsenbord 0, zodra deze waarde wordt verhoogd, gaat het gehele scherm omhoog
-        .offset(y: -self.valueVoorToetsenbord)
-        
-        // Animatie toevoegen voor wanneer de offset van het scherm veranderd
-        .animation(.spring())
         .onAppear {
-            
-            // Data van Utrecht laden bij het opstarten van de app
             self.weerberichtVM.fetchWeerbericht(stadNaam: "Utrecht")
-            
-            // Deze observer zorgt ervoor dat
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) {
-                (noti) in
-                self.valueVoorToetsenbord = 140
-            }
-            
-            //
-            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) {
-                (noti) in
-                self.valueVoorToetsenbord = 0
-            }
         }
     }
 }

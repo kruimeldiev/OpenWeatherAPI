@@ -9,13 +9,12 @@
 import Foundation
 
 enum DataLadenStatus {
-    case none
     case loading
     case success
     case failure
 }
 
-enum TempUnit: String {
+enum TempUnit: String, CaseIterable {
     case fahrenheit
     case celsius
 }
@@ -24,52 +23,69 @@ class WeerberichtViewModel: ObservableObject {
     
     @Published private var weerbericht: Weerbericht?
     @Published var errorBericht = ""
-    @Published var dataLadenStatus: DataLadenStatus = .none
+    @Published var dataLadenStatus: DataLadenStatus = .loading
     @Published var tempUnit: TempUnit = .celsius
     
-    
-    
-    // WAAROM HEB IK HIER EEN GUARD STATEMENT??
-    var temperatuur: Double {
+    var temperatuur: String {
         guard let temperatuur = weerbericht?.main.temp else {
-            return 0.0
+            return "N/A"
         }
-        return temperatuur
+        switch tempUnit {
+        case .fahrenheit:
+            return String(format: "%.0f F", temperatuur.toFahrenheit())
+        case .celsius:
+            return String(format: "%.0f C", temperatuur.toCelsius())
+        }
     }
     
-    var voelt_aan_als: Double {
+    var voelt_aan_als: String {
         guard let voelt_aan_als = weerbericht?.main.feels_like else {
-            return 0.0
+            return "N/A"
         }
-        return voelt_aan_als
+        switch tempUnit {
+        case .fahrenheit:
+            return String(format: "%.0f F", voelt_aan_als.toFahrenheit())
+        case .celsius:
+            return String(format: "%.0f C", voelt_aan_als.toCelsius())
+        }
     }
     
-    var temp_min: Double {
+    var temp_min: String {
         guard let temp_min = weerbericht?.main.temp_min else {
-            return 0.0
+            return "N/A"
         }
-        return temp_min
+        switch tempUnit {
+        case .fahrenheit:
+            return String(format: "%.0f F", temp_min.toFahrenheit())
+        case .celsius:
+            return String(format: "%.0f C", temp_min.toCelsius())
+        }
     }
     
-    var temp_max: Double {
+    var temp_max: String {
         guard let temp_max = weerbericht?.main.temp_max else {
-            return 0.0
+            return "N/A"
         }
-        return temp_max
+        switch tempUnit {
+        case .fahrenheit:
+            return String(format: "%.0f F", temp_max.toFahrenheit())
+        case .celsius:
+            return String(format: "%.0f C", temp_max.toCelsius())
+        }
     }
     
-    var luchtdruk: Int {
+    var luchtdruk: String {
         guard let luchtdruk = weerbericht?.main.pressure else {
-            return 0
+            return "N/A"
         }
-        return luchtdruk
+        return String(luchtdruk)
     }
     
-    var vochtigheid: Int {
-        guard let vochtigheid = weerbericht?.main.pressure else {
-            return 0
+    var vochtigheid: String {
+        guard let vochtigheid = weerbericht?.main.humidity else {
+            return "N/A"
         }
-        return vochtigheid
+        return String(vochtigheid)
     }
     
     func fetchWeerbericht(stadNaam: String) {
