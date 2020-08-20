@@ -15,17 +15,21 @@ enum DataLadenStatus {
     case failure
 }
 
+enum TempUnit: String {
+    case fahrenheit
+    case celsius
+}
+
 class WeerberichtViewModel: ObservableObject {
     
     @Published private var weerbericht: Weerbericht?
     @Published var errorBericht = ""
     @Published var dataLadenStatus: DataLadenStatus = .none
-    
+    @Published var tempUnit: TempUnit = .celsius
     
     
     
     // WAAROM HEB IK HIER EEN GUARD STATEMENT??
-    // Ook even kijken of ik de else statement kan verkorten!! (: ?)
     var temperatuur: Double {
         guard let temperatuur = weerbericht?.main.temp else {
             return 0.0
