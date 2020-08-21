@@ -15,6 +15,8 @@ struct ContentView: View {
     @State var zoekbalkText = ""
     @State var huidigeLokatie = "Utrecht"
     
+    @State var datum = ""
+    
     var body: some View {
         
         ZStack{
@@ -27,12 +29,14 @@ struct ContentView: View {
                     TextField("Zoek op lokatie", text: $zoekbalkText, onCommit: {
                         self.weerberichtVM.fetchWeerbericht(stadNaam: self.zoekbalkText)
                         self.huidigeLokatie = self.zoekbalkText
+                        self.datum = self.weerberichtVM.getDatum()
                     })
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         self.weerberichtVM.fetchWeerbericht(stadNaam: self.zoekbalkText)
                         self.huidigeLokatie = self.zoekbalkText
-                    }) {Text("Zoek")}
+                        self.datum = self.weerberichtVM.getDatum()
+                    }) {Text("Zoek")}.padding(.horizontal, 10)
                 }
                 .padding(.top)
                 
@@ -45,7 +49,7 @@ struct ContentView: View {
                             .font(.custom("SF Pro Text Heavy", size: 48))
                             .foregroundColor(Color("FontColor"))
                     }
-                    Text(self.weerberichtVM.getDatum())
+                    Text(datum)
                 }
                 .padding(.vertical, 40)
                 
@@ -54,8 +58,7 @@ struct ContentView: View {
                 } else if self.weerberichtVM.dataLadenStatus == .success {
                     WeerberichtView(weerberichtVM: self.weerberichtVM)
                 } else if self.weerberichtVM.dataLadenStatus == .failure {
-                    Text(self.weerberichtVM.errorBericht)
-                        .foregroundColor(Color("FontColor"))
+                    WeerberichtLadenView()
                 }
                 
                 VStack(spacing: 10) {
@@ -98,6 +101,7 @@ struct ContentView: View {
         }
         .onAppear {
             self.weerberichtVM.fetchWeerbericht(stadNaam: "Utrecht")
+            self.datum = self.weerberichtVM.getDatum()
         }
     }
 }

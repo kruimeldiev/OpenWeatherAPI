@@ -11,7 +11,7 @@ import SwiftUI
 struct WeerberichtView: View {
     
     @ObservedObject var weerberichtVM: WeerberichtViewModel
-    @State var weerIcoon = "cloud"
+    @State var weerIcoon = ""
     
     var body: some View {
         

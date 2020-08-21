@@ -24,6 +24,7 @@ struct Temperatuur: Decodable {
 }
 
 struct luchtStatus: Decodable {
+    let id: Int
     let main: String
     let description: String
 }

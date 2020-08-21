@@ -88,6 +88,13 @@ class WeerberichtViewModel: ObservableObject {
         return String(vochtigheid)
     }
     
+    var luchtID: Int {
+        guard let luchtID = weerbericht?.weather[0].id else {
+            return 801
+        }
+        return luchtID
+    }
+    
     var luchtStatus: String {
         guard let luchtStatus = weerbericht?.weather[0].main else {
             return "N/A"
