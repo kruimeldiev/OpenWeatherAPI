@@ -20,24 +20,36 @@ struct WeerberichtLadenView: View {
                 .shadow(color: Color(.black).opacity(0.1), radius: 8, x: 8, y: 8)
                 .shadow(color: Color(.white), radius: 8, x: -8, y: -8)
             
-            HStack {
-                VStack(alignment: .center) {
-                    Text("0")
-                        .font(Font.largeTitle)
+            VStack(spacing: 30) {
+                HStack {
+                    Text("N/A")
+                        .font(.custom("SF Pro Text Heavy", size: 64))
                         .foregroundColor(Color("FontColor"))
-                    Text("Voelt als: ")
+                        .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "questionmark.circle")
+                        .font(.custom("SF Pro Text Heavy", size: 64))
                         .foregroundColor(Color("FontColor"))
+                        .padding(.horizontal)
                 }
                 
-                VStack {
-                    Image(systemName: "arrow.2.circlepath")
-                        .rotationEffect(Angle(degrees: 45))
-                        .font(Font.largeTitle)
+                HStack {
+                    Text("Voelt als: N/A")
+                        .font(.custom("SF Pro Text Regular", size: 16))
                         .foregroundColor(Color("FontColor"))
-                    Text("Bewolkt")
+                        .padding(.horizontal)
+                    
+                    Spacer()
+                    
+                    Text("N/A")
+                        .font(.custom("SF Pro Text Regular", size: 16))
                         .foregroundColor(Color("FontColor"))
+                        .padding(.horizontal)
                 }
             }
+            .padding()
         }
     }
 }

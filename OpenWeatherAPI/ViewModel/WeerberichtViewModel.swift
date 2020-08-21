@@ -32,9 +32,9 @@ class WeerberichtViewModel: ObservableObject {
         }
         switch tempUnit {
         case .fahrenheit:
-            return String(format: "%.0f F", temperatuur.toFahrenheit())
+            return String(format: "%.0f °F", temperatuur.toFahrenheit())
         case .celsius:
-            return String(format: "%.0f C", temperatuur.toCelsius())
+            return String(format: "%.0f °C", temperatuur.toCelsius())
         }
     }
     
@@ -44,9 +44,9 @@ class WeerberichtViewModel: ObservableObject {
         }
         switch tempUnit {
         case .fahrenheit:
-            return String(format: "%.0f F", voelt_aan_als.toFahrenheit())
+            return String(format: "%.0f °F", voelt_aan_als.toFahrenheit())
         case .celsius:
-            return String(format: "%.0f C", voelt_aan_als.toCelsius())
+            return String(format: "%.0f °C", voelt_aan_als.toCelsius())
         }
     }
     
@@ -56,9 +56,9 @@ class WeerberichtViewModel: ObservableObject {
         }
         switch tempUnit {
         case .fahrenheit:
-            return String(format: "%.0f F", temp_min.toFahrenheit())
+            return String(format: "%.0f °F", temp_min.toFahrenheit())
         case .celsius:
-            return String(format: "%.0f C", temp_min.toCelsius())
+            return String(format: "%.0f °C", temp_min.toCelsius())
         }
     }
     
@@ -68,9 +68,9 @@ class WeerberichtViewModel: ObservableObject {
         }
         switch tempUnit {
         case .fahrenheit:
-            return String(format: "%.0f F", temp_max.toFahrenheit())
+            return String(format: "%.0f °F", temp_max.toFahrenheit())
         case .celsius:
-            return String(format: "%.0f C", temp_max.toCelsius())
+            return String(format: "%.0f °C", temp_max.toCelsius())
         }
     }
     
@@ -86,6 +86,34 @@ class WeerberichtViewModel: ObservableObject {
             return "N/A"
         }
         return String(vochtigheid)
+    }
+    
+    var luchtStatus: String {
+        guard let luchtStatus = weerbericht?.weather[0].main else {
+            return "N/A"
+        }
+        return String(luchtStatus)
+    }
+    
+    var luchtBeschrijving: String {
+        guard let luchtBeschrijving = weerbericht?.weather[0].description else {
+            return "N/A"
+        }
+        return String(luchtBeschrijving)
+    }
+    
+    var windSnelheid: String {
+        guard let windSnelheid = weerbericht?.wind.speed else {
+            return "N/A"
+        }
+        return String("\(windSnelheid) m/s")
+    }
+    
+    var windRichting: String {
+        guard let windRichting = weerbericht?.wind.deg else {
+            return "N/A"
+        }
+        return String(windRichting)
     }
     
     func fetchWeerbericht(stadNaam: String) {
@@ -109,5 +137,11 @@ class WeerberichtViewModel: ObservableObject {
                 self.weerbericht = nil
             }
         }
+    }
+    
+    func getDatum() -> String {
+        let datumFormatter = DateFormatter()
+        datumFormatter.dateFormat = "EEE d MMMM yyyy HH:mm:ss"
+        return datumFormatter.string(from: Date())
     }
 }

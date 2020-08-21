@@ -21,21 +21,7 @@ struct ContentView: View {
             Color("Offwhite")
                 .edgesIgnoringSafeArea(.all)
             
-            VStack {
-                
-                VStack {
-                    HStack {
-                        Image(systemName: "mappin.and.ellipse")
-                            .font(Font.largeTitle)
-                            .foregroundColor(Color("FontColor"))
-                            .padding()
-                        Text(huidigeLokatie)
-                            .font(Font.largeTitle)
-                            .foregroundColor(Color("FontColor"))
-                    }
-                    Text("Hier komt de datum")
-                }
-                .padding(.vertical, 60)
+            VStack(spacing: 20) {
                 
                 HStack {
                     TextField("Zoek op lokatie", text: $zoekbalkText, onCommit: {
@@ -48,6 +34,20 @@ struct ContentView: View {
                         self.huidigeLokatie = self.zoekbalkText
                     }) {Text("Zoek")}
                 }
+                .padding(.top)
+                
+                VStack(spacing: 40) {
+                    HStack(spacing: 20) {
+                        Image(systemName: "mappin.and.ellipse")
+                            .font(.custom("SF Pro Text Heavy", size: 48))
+                            .foregroundColor(Color("FontColor"))
+                        Text(huidigeLokatie)
+                            .font(.custom("SF Pro Text Heavy", size: 48))
+                            .foregroundColor(Color("FontColor"))
+                    }
+                    Text(self.weerberichtVM.getDatum())
+                }
+                .padding(.vertical, 40)
                 
                 if self.weerberichtVM.dataLadenStatus == .loading {
                     WeerberichtLadenView()
@@ -58,16 +58,29 @@ struct ContentView: View {
                         .foregroundColor(Color("FontColor"))
                 }
                 
-                VStack {
+                VStack(spacing: 10) {
                     HStack {
                         Text("Lucht vochtigheid:")
+                        Spacer()
                         Text("\(self.weerberichtVM.vochtigheid)%")
                     }
                     HStack {
                         Text("Luchtdruk:")
+                        Spacer()
                         Text("\(self.weerberichtVM.luchtdruk) hPa")
                     }
+                    HStack {
+                        Text("Wind snelheid:")
+                        Spacer()
+                        Text(self.weerberichtVM.windSnelheid)
+                    }
+                    HStack {
+                        Text("Wind richting:")
+                        Spacer()
+                        Text(self.weerberichtVM.windRichting)
+                    }
                 }
+                .padding(40)
                 .foregroundColor(Color("FontColor"))
                 
                 Spacer()
