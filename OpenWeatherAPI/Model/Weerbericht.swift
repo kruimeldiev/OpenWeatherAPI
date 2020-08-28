@@ -11,6 +11,7 @@ import Foundation
 struct Weerbericht: Decodable {
     let main: Temperatuur
     let weather: [LuchtStatus]
+    let clouds: Bewolking
     let wind: Wind
     let sys: Land
     let timezone: Int
@@ -24,6 +25,10 @@ struct Temperatuur: Decodable {
     let temp_max: Double
     let pressure: Int
     let humidity: Int
+}
+
+struct Bewolking: Decodable {
+    let all: Int
 }
 
 struct LuchtStatus: Decodable {

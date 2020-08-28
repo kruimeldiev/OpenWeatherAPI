@@ -88,6 +88,13 @@ class WeerberichtViewModel: ObservableObject {
         return String(vochtigheid)
     }
     
+    var bewolking: String {
+        guard let bewolking = weerbericht?.clouds.all else {
+            return "0"
+        }
+        return String(bewolking)
+    }
+    
     var luchtID: Int {
         guard let luchtID = weerbericht?.weather[0].id else {
             return 801
@@ -168,8 +175,17 @@ class WeerberichtViewModel: ObservableObject {
     }
     
     func getDatum() -> String {
+        
+        // Aantal seconden om aan datum toe te voegen
+        guard let seconden = self.weerbericht?.timezone else {
+            return "Geen datum gevonden"
+        }
+        
+        // Format maken om de datum in weer te geven
         let datumFormatter = DateFormatter()
         datumFormatter.dateFormat = "EEE d MMMM yyyy HH:mm:ss"
+        datumFormatter.timeZone = TimeZone(secondsFromGMT: seconden)
+        
         return datumFormatter.string(from: Date())
     }
     

@@ -15,8 +15,6 @@ struct ContentView: View {
     @State var zoekbalkText = ""
     @State var huidigeLokatie = "Utrecht"
     
-    @State var datum = ""
-    
     var body: some View {
         
         ZStack{
@@ -29,13 +27,11 @@ struct ContentView: View {
                     TextField("Zoek op lokatie", text: $zoekbalkText, onCommit: {
                         self.weerberichtVM.fetchWeerbericht(stadNaam: self.zoekbalkText)
                         self.huidigeLokatie = self.zoekbalkText
-                        self.datum = self.weerberichtVM.getDatum()
                     })
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     Button(action: {
                         self.weerberichtVM.fetchWeerbericht(stadNaam: self.zoekbalkText)
                         self.huidigeLokatie = self.zoekbalkText
-                        self.datum = self.weerberichtVM.getDatum()
                     }) {Text("Zoek")}.padding(.horizontal, 10)
                 }
                 .padding(.top)
@@ -49,7 +45,7 @@ struct ContentView: View {
                             .font(.custom("SF Pro Text Heavy", size: 36))
                             .foregroundColor(Color("FontColor"))
                     }
-                    Text(datum)
+                    Text(self.weerberichtVM.getDatum())
                 }
                 .padding(.vertical, 40)
                 
@@ -66,6 +62,11 @@ struct ContentView: View {
                         Text("Lucht vochtigheid:")
                         Spacer()
                         Text("\(self.weerberichtVM.vochtigheid)%")
+                    }
+                    HStack {
+                        Text("Bewolking:")
+                        Spacer()
+                        Text("\(self.weerberichtVM.bewolking)%")
                     }
                     HStack {
                         Text("Luchtdruk:")
@@ -103,7 +104,6 @@ struct ContentView: View {
         }
         .onAppear {
             self.weerberichtVM.fetchWeerbericht(stadNaam: "Utrecht")
-            self.datum = self.weerberichtVM.getDatum()
         }
     }
 }
