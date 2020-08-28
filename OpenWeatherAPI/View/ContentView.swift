@@ -43,10 +43,10 @@ struct ContentView: View {
                 VStack(spacing: 40) {
                     HStack(spacing: 20) {
                         Image(systemName: "mappin.and.ellipse")
-                            .font(.custom("SF Pro Text Heavy", size: 48))
+                            .font(.custom("SF Pro Text Heavy", size: 24))
                             .foregroundColor(Color("FontColor"))
-                        Text(huidigeLokatie)
-                            .font(.custom("SF Pro Text Heavy", size: 48))
+                        Text(self.weerberichtVM.naam + ", " + self.weerberichtVM.land)
+                            .font(.custom("SF Pro Text Heavy", size: 36))
                             .foregroundColor(Color("FontColor"))
                     }
                     Text(datum)
@@ -80,7 +80,9 @@ struct ContentView: View {
                     HStack {
                         Text("Wind richting:")
                         Spacer()
-                        Text(self.weerberichtVM.windRichting)
+                        Image(systemName: "location.circle")
+                            .rotationEffect(Angle(degrees: Double(self.weerberichtVM.windRichting)))
+                        Text(self.weerberichtVM.getWindrichtingCordinalDirection(windrichting: self.weerberichtVM.windRichting))
                     }
                 }
                 .padding(40)

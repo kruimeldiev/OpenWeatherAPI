@@ -10,8 +10,11 @@ import Foundation
 
 struct Weerbericht: Decodable {
     let main: Temperatuur
-    let weather: [luchtStatus]
+    let weather: [LuchtStatus]
     let wind: Wind
+    let sys: Land
+    let timezone: Int
+    let name: String
 }
 
 struct Temperatuur: Decodable {
@@ -23,7 +26,7 @@ struct Temperatuur: Decodable {
     let humidity: Int
 }
 
-struct luchtStatus: Decodable {
+struct LuchtStatus: Decodable {
     let id: Int
     let main: String
     let description: String
@@ -32,4 +35,8 @@ struct luchtStatus: Decodable {
 struct Wind: Decodable {
     let speed: Double
     let deg: Int
+}
+
+struct Land: Decodable {
+    let country: String
 }

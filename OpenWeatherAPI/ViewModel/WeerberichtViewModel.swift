@@ -21,7 +21,7 @@ enum TempUnit: String, CaseIterable {
 
 class WeerberichtViewModel: ObservableObject {
     
-    @Published private var weerbericht: Weerbericht?
+    @Published var weerbericht: Weerbericht?
     @Published var errorBericht = ""
     @Published var dataLadenStatus: DataLadenStatus = .loading
     @Published var tempUnit: TempUnit = .celsius
@@ -116,11 +116,32 @@ class WeerberichtViewModel: ObservableObject {
         return String("\(windSnelheid) m/s")
     }
     
-    var windRichting: String {
+    var windRichting: Int {
         guard let windRichting = weerbericht?.wind.deg else {
-            return "N/A"
+            return 0
         }
-        return String(windRichting)
+        return windRichting
+    }
+    
+    var naam: String {
+        guard let plaatsNaam = weerbericht?.name else {
+            return "Onbekend"
+        }
+        return plaatsNaam
+    }
+    
+    var land: String {
+        guard let land = weerbericht?.sys.country else {
+            return ""
+        }
+        return land
+    }
+    
+    var tijdZone: Int {
+        guard let tijdZone = weerbericht?.timezone else {
+            return 0
+        }
+        return tijdZone
     }
     
     func fetchWeerbericht(stadNaam: String) {
@@ -150,5 +171,42 @@ class WeerberichtViewModel: ObservableObject {
         let datumFormatter = DateFormatter()
         datumFormatter.dateFormat = "EEE d MMMM yyyy HH:mm:ss"
         return datumFormatter.string(from: Date())
+    }
+    
+    func getWindrichtingCordinalDirection(windrichting: Int) -> String {
+        
+        if (windrichting >= 11 && windrichting < 34) {
+            return "NNO"
+        } else if (windrichting >= 34 && windrichting < 57) {
+            return "NO"
+        } else if (windrichting >= 57 && windrichting < 79) {
+            return "ONO"
+        } else if (windrichting >= 79 && windrichting < 102) {
+            return "O"
+        } else if (windrichting >= 102 && windrichting < 124) {
+            return "OZO"
+        } else if (windrichting >= 124 && windrichting < 147) {
+            return "ZO"
+        } else if (windrichting >= 147 && windrichting < 169) {
+            return "ZZO"
+        } else if (windrichting >= 169 && windrichting < 192) {
+            return "Z"
+        } else if (windrichting >= 192 && windrichting < 214) {
+            return "ZZW"
+        } else if (windrichting >= 214 && windrichting < 237) {
+            return "ZW"
+        } else if (windrichting >= 237 && windrichting < 259) {
+            return "WZW"
+        } else if (windrichting >= 259 && windrichting < 282) {
+            return "W"
+        } else if (windrichting >= 282 && windrichting < 304) {
+            return "WNW"
+        } else if (windrichting >= 304 && windrichting < 327) {
+            return "NW"
+        } else if (windrichting >= 327 && windrichting < 349) {
+            return "NNW"
+        } else {
+            return "N"
+        }
     }
 }
