@@ -11,7 +11,6 @@ import SwiftUI
 struct WeerberichtView: View {
     
     @ObservedObject var weerberichtVM: WeerberichtViewModel
-    @State var weerIcoon = ""
     
     var body: some View {
         
@@ -32,7 +31,7 @@ struct WeerberichtView: View {
                     
                     Spacer()
                     
-                    Image(systemName: weerIcoon)
+                    Image(systemName: self.weerberichtVM.getWeerIcoon(weerCode: self.weerberichtVM.luchtID, bewolking: self.weerberichtVM.bewolking, windsnelheid: Int(self.weerberichtVM.windSnelheid)))
                         .font(.custom("SF Pro Text Heavy", size: 64))
                         .foregroundColor(Color("FontColor"))
                         .padding(.horizontal)

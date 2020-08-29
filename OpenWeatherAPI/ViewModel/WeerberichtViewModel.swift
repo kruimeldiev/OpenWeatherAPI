@@ -88,11 +88,11 @@ class WeerberichtViewModel: ObservableObject {
         return String(vochtigheid)
     }
     
-    var bewolking: String {
+    var bewolking: Int {
         guard let bewolking = weerbericht?.clouds.all else {
-            return "0"
+            return 0
         }
-        return String(bewolking)
+        return Int(bewolking)
     }
     
     var luchtID: Int {
@@ -116,11 +116,11 @@ class WeerberichtViewModel: ObservableObject {
         return String(luchtBeschrijving)
     }
     
-    var windSnelheid: String {
+    var windSnelheid: Double {
         guard let windSnelheid = weerbericht?.wind.speed else {
-            return "N/A"
+            return 0
         }
-        return String("\(windSnelheid) m/s")
+        return windSnelheid
     }
     
     var windRichting: Int {
@@ -187,6 +187,32 @@ class WeerberichtViewModel: ObservableObject {
         datumFormatter.timeZone = TimeZone(secondsFromGMT: seconden)
         
         return datumFormatter.string(from: Date())
+    }
+    
+    func getWeerIcoon(weerCode: Int, bewolking: Int, windsnelheid: Int) -> String {
+        
+        if (windSnelheid >= 10) {
+            return "wind"
+        } else if (bewolking >= 40 && weerCode > 799) {
+            return "cloud"
+        } else if (weerCode >= 200 && weerCode <= 202) {
+            return "cloud.bolt.rain"
+        } else if (weerCode >= 210 && weerCode <= 232) {
+            return "cloud.bolt"
+        } else if (weerCode >= 300 && weerCode <= 504) {
+            return "cloud.rain"
+        } else if (weerCode == 511) {
+            return "cloud.hail"
+        } else if (weerCode >= 520 && weerCode <= 531) {
+            return "cloud.rain"
+        } else if (weerCode >= 600 && weerCode <= 622) {
+            return "cloud.snow"
+        } else if (weerCode >= 701 && weerCode <= 781) {
+            return "cloud.fog"
+        } else {
+            return "sun.max"
+        }
+        
     }
     
     func getWindrichtingCordinalDirection(windrichting: Int) -> String {

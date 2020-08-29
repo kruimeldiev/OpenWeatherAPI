@@ -76,7 +76,7 @@ struct ContentView: View {
                     HStack {
                         Text("Wind snelheid:")
                         Spacer()
-                        Text(self.weerberichtVM.windSnelheid)
+                        Text("\(String(format: "%.2f", self.weerberichtVM.windSnelheid)) m/s")
                     }
                     HStack {
                         Text("Wind richting:")
